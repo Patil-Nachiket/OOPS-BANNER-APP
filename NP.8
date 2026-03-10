@@ -1,0 +1,88 @@
+/**
+ * ============================================================================
+ *  Project      : OOPS Banner Application
+ *  Use Case     : UC8 - Map-Based Pattern Storage & Rendering
+ *  Description  : Uses HashMap to store and retrieve character patterns
+ *                 efficiently while maintaining clean separation between
+ *                 data storage and rendering logic.
+ *
+ *  Author       : Nachiket Patil
+ *  Version      : 5.0 (Final Architecture)
+ * ============================================================================
+ */
+
+import java.util.HashMap;
+import java.util.Map;
+
+public final class OOPSBannerApp {
+
+    private static final int HEIGHT = 5;
+
+    /* ================= Pattern Registry ================= */
+    private static final Map<Character, String[]> PATTERN_MAP = new HashMap<>();
+
+    static {
+        PATTERN_MAP.put('O', new String[]{
+                " OOO ",
+                "O   O",
+                "O   O",
+                "O   O",
+                " OOO "
+        });
+
+        PATTERN_MAP.put('P', new String[]{
+                "PPP  ",
+                "P   P",
+                "PPP  ",
+                "P    ",
+                "P    "
+        });
+
+        PATTERN_MAP.put('S', new String[]{
+                " SSS ",
+                "S    ",
+                " SSS ",
+                "    S",
+                " SSS "
+        });
+    }
+
+    private OOPSBannerApp() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    public static void main(String[] args) {
+        renderBanner("OOPS");
+    }
+
+    /**
+     * Renders banner dynamically using Map lookup.
+     *
+     * @param word Input word to display as banner
+     */
+    private static void renderBanner(String word) {
+
+        for (int row = 0; row < HEIGHT; row++) {
+
+            StringBuilder lineBuilder = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+
+                String[] pattern = PATTERN_MAP.getOrDefault(
+                        Character.toUpperCase(ch),
+                        new String[]{
+                                "     ",
+                                "     ",
+                                "     ",
+                                "     ",
+                                "     "
+                        }
+                );
+
+                lineBuilder.append(pattern[row]).append("  ");
+            }
+
+            System.out.println(lineBuilder);
+        }
+    }
+}
