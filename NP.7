@@ -1,0 +1,102 @@
+/**
+ * ============================================================================
+ *  Project      : OOPS Banner Application
+ *  Use Case     : UC7 - Encapsulated Character Pattern Mapping
+ *  Description  : Implements a static inner class to manage character
+ *                 patterns using Object-Oriented principles.
+ *
+ *  Author       : Nachiket Patil
+ *  Version      : 4.0
+ * ============================================================================
+ */
+
+import java.util.HashMap;
+import java.util.Map;
+
+public final class OOPSBannerApp {
+
+    private static final int HEIGHT = 5;
+
+    private OOPSBannerApp() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    public static void main(String[] args) {
+
+        CharacterPatternMap patternMap = new CharacterPatternMap();
+
+        String word = "OOPS";
+        renderBanner(word, patternMap);
+    }
+
+    /**
+     * Builds and renders banner dynamically using stored mappings.
+     */
+    private static void renderBanner(String word, CharacterPatternMap map) {
+
+        for (int row = 0; row < HEIGHT; row++) {
+
+            StringBuilder lineBuilder = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+                String[] pattern = map.getPattern(ch);
+                lineBuilder.append(pattern[row]).append("  ");
+            }
+
+            System.out.println(lineBuilder);
+        }
+    }
+
+    /* =======================================================================
+       Static Inner Class for Pattern Management
+       ======================================================================= */
+    static class CharacterPatternMap {
+
+        private final Map<Character, String[]> patternStore;
+
+        public CharacterPatternMap() {
+            patternStore = new HashMap<>();
+            initializePatterns();
+        }
+
+        private void initializePatterns() {
+
+            patternStore.put('O', new String[]{
+                    " OOO ",
+                    "O   O",
+                    "O   O",
+                    "O   O",
+                    " OOO "
+            });
+
+            patternStore.put('P', new String[]{
+                    "PPP  ",
+                    "P   P",
+                    "PPP  ",
+                    "P    ",
+                    "P    "
+            });
+
+            patternStore.put('S', new String[]{
+                    " SSS ",
+                    "S    ",
+                    " SSS ",
+                    "    S",
+                    " SSS "
+            });
+        }
+
+        public String[] getPattern(char character) {
+            return patternStore.getOrDefault(
+                    Character.toUpperCase(character),
+                    new String[]{
+                            "     ",
+                            "     ",
+                            "     ",
+                            "     ",
+                            "     "
+                    }
+            );
+        }
+    }
+}
