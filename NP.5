@@ -1,0 +1,61 @@
+/**
+ * ============================================================================
+ *  Project      : OOPS Banner Application
+ *  Use Case     : UC4 - Concise Banner Construction using String.join()
+ *  Description  : Demonstrates professional array declaration and 
+ *                 initialization combined with String.join() for 
+ *                 clean and maintainable banner rendering.
+ *
+ *  Author       : Nachiket Patil
+ *  Version      : 2.0
+ *  Since        : 2026
+ * ============================================================================
+ */
+
+public final class OOPSBannerApp {
+
+    /**
+     * Private constructor to prevent instantiation.
+     * This class is designed to be utility-style.
+     */
+    private OOPSBannerApp() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    /**
+     * Application entry point.
+     *
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
+        printBanner(createBanner());
+    }
+
+    /**
+     * Creates and initializes the banner structure.
+     * Combines declaration and initialization in a single statement.
+     *
+     * @return 2D String array representing banner rows
+     */
+    private static String[][] createBanner() {
+        return new String[][]{
+            {"O", "O", "O", " ", "P", "P", "P", " ", "S", "S", "S"},
+            {"O", " ", "O", " ", "P", " ", "P", " ", "S"},
+            {"O", " ", "O", " ", "P", "P", "P", " ", "S", "S", "S"},
+            {"O", " ", "O", " ", "P", " ", " ", " ", " ", " ", "S"},
+            {"O", "O", "O", " ", "P", " ", " ", " ", "S", "S", "S"}
+        };
+    }
+
+    /**
+     * Prints the banner using enhanced for-loop
+     * and String.join() for clean concatenation.
+     *
+     * @param banner 2D String array representing banner rows
+     */
+    private static void printBanner(String[][] banner) {
+        for (String[] row : banner) {
+            System.out.println(String.join("", row));
+        }
+    }
+}
